@@ -1,0 +1,384 @@
+* {
+	text-shadow: none !important;
+}
+
+html {
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+}
+
+body {
+	background: #252525;
+	font-size: 13px;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+/* Modifications */
+.relative {
+	position: relative !important;
+}
+
+.absolute {
+	position: absolute !important;
+}
+
+.absBottomRight {
+	bottom: -1px !important;
+	right: 13px !important;
+}
+
+.wordwrap { 
+   white-space: pre-wrap !important;
+   white-space: -moz-pre-wrap !important;
+   white-space: -pre-wrap !important;
+   white-space: -o-pre-wrap !important;
+   word-wrap: break-word !important;
+}
+
+.selected {
+	background: #696c8f !important;
+}
+
+.tableHeader {
+	background: #1d1d1d !important;
+	font-weight: bold !important;
+	text-align: center !important;
+}
+
+.smallRow {
+	height: 20px !important;
+}
+
+.center {
+	margin: 0 auto !important;
+}
+
+.clearBoth{
+	clear: both !important;
+}
+
+.maxWidth {
+	width: 100% !important;
+}
+
+.blue {
+	background: #3c43ad !important;
+}
+
+.purple {
+	background: #461f70 !important;
+}
+
+.active {
+	background: #535353 !important;
+}
+
+.green {
+	background: #446e21 !important;
+}
+
+.red {
+	background: #8a211f !important;
+}
+
+.cyan {
+	background: #3d6973 !important;
+}
+
+.brand {
+	color: #90ccff !important;
+}
+
+.redBrand {
+	color: #ee646f !important;
+}
+
+.greenBrand {
+	color: #b0ec5e !important;
+}
+
+.marginRight {
+	margin-right: 5px !important;
+}
+
+.marginTop {
+	margin-top: 6px !important;
+}
+
+.smallPrice {
+	font-size: 9px !important;
+	color: #ababab !important;
+}
+
+.required {
+	background: #6a1a1a !important;
+}
+
+.noBorder {
+	border: none !important;
+}
+
+.border {
+	border: 1px solid black !important;
+}
+
+.borderRight {
+	border-right: 1px solid black !important;
+}
+
+.floatRight {
+	float: right !important;
+}
+
+.floatLeft {
+	float: left !important;
+}
+
+.horizontalPadding {
+	padding: 0 10px !important;
+}
+
+.bold {
+	font-weight: bold !important
+}
+
+/* Table button */
+.tableButton {
+	margin: 0 !important;
+	padding: 0 !important;
+	font-size: 12px !important;
+	border: none !important;
+	height: 30px !important;
+	line-height: 32px !important;
+}
+
+/* Table textfield */
+.tableTextfield {
+	height: 100% !important;
+	border: none !important;
+	color: white !important;
+	background: #494949;
+}
+
+/* Table items */
+.image {
+	background-size : 100% 100%,
+	background-repeat : no-repeat
+}
+
+.imageColumn {
+	width: 80px !important;
+}
+
+.itemHeader {
+	width: 100% !important;
+	height: 16px !important;
+	background: #1d1d1d !important;
+	overflow: hidden !important;
+	text-overflow: ellipsis !important;
+	white-space: nowrap !important;
+}
+
+.itemDescription {
+	width: 100% !important;
+	height: 50px !important;
+	vertical-align: top !important;
+	padding: 7px !important;
+}
+
+/* Table section */
+table.default {
+	width: 100%;
+	font-size: 12px;
+	color: white;
+	table-layout: fixed;
+}
+
+table.default, table.default th, table.default td {
+	border-collapse: collapse;
+	border-spacing: 0;
+	padding: 0;
+}
+
+table.default th {
+	border: 1px solid black;
+	background: #222222;
+	text-align: left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	height: 30px;
+}
+
+table.default td {
+	color: white;
+	border: 1px solid black;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	height: 30px;
+}
+
+table.default tr:nth-child(even) {
+	background: #333333;
+}
+
+table.default tr:nth-child(odd) {
+	background: #444444;
+}
+
+.searchbox {
+	font-size: 12px !important;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+/* PM section */
+.PM {
+	border: 1px solid black;
+	margin-bottom: 10px;
+	display: table;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.PM.sent {
+	float: right;
+	text-align: right;
+}
+
+.PM_sender {
+	max-width: 200px;
+	height: 20px;
+	background: #3c43ad;
+	color: white;
+	border-bottom: 1px solid black;
+	word-wrap: break-word;
+	text-align: right;
+ 	overflow: hidden;
+ 	white-space: nowrap;
+ 	text-overflow: ellipsis;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding: 0 5px;
+}
+
+.PM_message {
+	max-width: 200px;
+	color: black;
+	background: white;
+	font-size: 13px;
+	white-space: pre-wrap;      /* CSS 2.1 */
+	white-space: pre-line;      /* CSS 3.0 */
+	white-space: -pre-wrap;     /* Opera 4-6 */
+	white-space: -o-pre-wrap;   /* Opera 7 */
+	white-space: -moz-pre-wrap; /* Mozilla */
+	white-space: -hp-pre-wrap;  /* HP Printers */
+	word-wrap: break-word;      /* IE 5+ */
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	padding: 0 5px;
+}
+
+.PM_time {
+	float: left;
+	font-size: 10px;
+	vertical-align: middle;
+	margin-top: 3px;
+	margin-right: 10px;
+}
+
+.PM_name {
+	float: right;
+	max-width: 83px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* numeric input box */
+.numericInput {
+	width: 72px !important;
+	height: 17px !important;
+	border: 1px solid black !important
+}
+
+.niControlBox {
+	float: left !important;
+}
+
+.niInput {
+	width: 34px !important;
+	height: 15px !important;
+	float: left !important;
+	border: none !important;
+	background: #333333 !important;
+	color: white !important;
+}
+
+.niButton {
+	display: block !important;
+	width: 17px !important;
+	height: 17px !important;
+	background: #3c43ad !important;
+	color: white !important;
+	font-weight: bold !important;
+	line-height: 17px !important;
+	text-align: center !important;
+}
+
+.niPlus {
+	float: left !important;
+}
+
+.niMinus {
+	float: right !important;
+	border-left: 1px solid black !important;
+	border-right: 1px solid black !important;
+}
+
+/* footer navigation */
+.footerNavigation {
+	margin: 0 auto !important;
+}
+
+/* Mobile CSS */
+.ui-footer {
+	bottom: 0 !important;
+	width: 100% !important;
+	border-top: 1px solid black !important;
+}
+
+.ui-header {
+	border-bottom: 1px solid black !important;
+}
+
+.smallButton {
+	font-size: 8px !important;
+	padding-left: 4px !important;
+	padding-right: 4px !important;
+}
+
+.redDelete {
+	font-size: 9px !important;
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+	margin-top: 15px !important;
+	margin-right: 15px !important;
+	background: #73271a !important;
+	width: 22px !important;
+	height: 22px !important;
+}
+
+.ui-header .ui-title {
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+h4 {
+	text-align: center !important;
+}

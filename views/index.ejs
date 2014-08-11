@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<!-- external dependencies -->
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+		<script src="http://ec2-54-73-0-85.eu-west-1.compute.amazonaws.com/socket.io/socket.io.js"></script>
+
+		<!-- local dependencies -->
+		<link rel="stylesheet" type="text/css" href="app/css/style.css">
+		<script src="app/js/load.js"></script>
+		<script src="app/js/dynamics.js"></script>
+		<script src="app/js/index.js"></script>
+		<script src="app/js/orders.js"></script>
+		<script src="app/js/items.js"></script>
+		<script src="app/js/purchase_history.js"></script>
+		<script src="app/js/cart.js"></script>
+		<script src="app/js/scanner.js"></script>
+		<script src="app/js/chat.js"></script>
+		<script src="app/js/contact.js"></script>
+
+		<link rel="stylesheet" href="app/dist/js/datepicker/databoxcss.css">
+		<script src="app/dist/js/datepicker/core.js"></script>
+		<script src="app/dist/js/datepicker/datebox.js"></script>
+		<script src="app/dist/js/datepicker/calbox.js"></script>
+
+		<title>Horeca Activity</title>
+	</head>
+	<body>
+		<div id="login" data-role="page" data-theme="b">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<h1>Horeca Activity</h1>
+			</div>
+
+			<div data-role="main" class="ui-content">
+				<p>Please enter your username and password to proceed.</p>
+				
+				<div class="ui-field-contain">
+					<input id="username" type="text" placeholder="Username">
+					<input id="password" type="password" placeholder="Password">
+				</div>
+				<button class="smallButton ui-btn ui-btn-b" onclick="login();">Login</button>
+			</div>
+
+			<a id="showLoginError" href="#loginError" data-rel="popup" data-position-to="window" data-transition="slidedown"></a>
+
+			<div data-role="popup" id="loginError" data-theme="b" style="max-width: 400px;">
+				<a href="#" data-rel="back" class="redDelete ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+				<div data-role="header" data-theme="b">
+					<h1>Failed to login</h1>
+				</div>
+				<div role="main" class="ui-content">
+					<p>The username or password you have entered is incorrect</p>
+				</div>
+			</div>
+
+			<div data-role="footer" data-position="fixed" data-tap-toggle="false">
+				<h1>&copy; Delano & Moesjarraf 2014</h1>
+			</div>
+		</div>
+
+
+
+		<div id="chat" data-role="page" data-theme="b">
+			<div data-role="main" class="ui-content">
+				<div id="PM_Container"></div>
+			</div>
+
+			<div data-role="footer" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>
+					<input id="chatbox" type="text" placeholder="Message">
+					<div class="footerNavigation" data-role="controlgroup" data-type="horizontal">
+						<a class="smallButton ui-btn blue" href="#login" onclick="logout();">Log out</a>
+						<a class="smallButton ui-btn" href="#orders" data-transition="slide" data-direction="reverse">Orders</a>
+						<a class="smallButton ui-btn" href="#contact" data-transition="slide" data-direction="reverse">Contact</a>
+						<a class="smallButton ui-btn" href="#chat">Chat</a>
+						<a class="smallButton ui-btn" href="#cart" data-transition="slide" onclick="checkCartEmpty();">Cart</a>
+						<a class="smallButton ui-btn green" onclick="sendMessage(document.getElementById('chatbox').value);">Send</a>
+					</div>
+				</h1>
+			</div>
+		</div>
+
+
+
+		<div id="contact" data-role="page" data-theme="b">
+			<div data-role="main" class="ui-content">
+				<input type="search" class="searchbox" table-link="tableUsers" data-mini="true" placeholder="Search by company name" data-theme="b"/>
+				<table data-role="table" data-mode="reflow" class="default" id="tableUsers">
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<div data-role="footer" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>
+					<div class="footerNavigation" data-role="controlgroup" data-type="horizontal">
+						<a class="smallButton ui-btn blue" href="#login" onclick="logout();">Log out</a>
+						<a class="smallButton ui-btn" href="#orders" data-transition="slide" data-direction="reverse">Orders</a>
+						<a class="smallButton ui-btn" href="#contact">Contact</a>
+						<a class="smallButton ui-btn" href="#cart" data-transition="slide" onclick="checkCartEmpty();">Cart</a>
+					</div>
+				</h1>
+			</div>
+		</div>
+
+
+
+		<div id="orders" data-role="page" data-theme="b">
+			<div class="ui-content" data-role="main">
+				<table data-role="table" data-mode="reflow" class="default" id="tableOrders">
+					<thead>
+						<tr>
+							<th data-priority="persist">Order</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<div data-role="footer" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>
+					<div class="footerNavigation" data-role="controlgroup" data-type="horizontal">
+						<a class="smallButton ui-btn blue" href="#login" onclick="logout();">Log out</a>
+						<a class="smallButton ui-btn" href="#orders">Orders</a>
+						<a class="smallButton ui-btn" href="#contact" data-transition="slide">Contact</a>
+						<a class="smallButton ui-btn" href="#cart" data-transition="slide" onclick="checkCartEmpty();">Cart</a>
+						<a class="smallButton ui-btn green" onclick="updateOrderList();">Refresh</a>
+					</div>
+				</h1>
+			</div>
+		</div>
+
+
+
+		<div id="order_details" data-role="page" data-theme="b">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<h1 id="h1_orderDetails">Order details</h1>
+			</div>
+
+			<div class="ui-content" data-role="main">
+				<table data-role="table" data-mode="reflow" class="default" id="tableOrderDetails">
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<div data-role="footer" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>
+					<div class="footerNavigation" data-role="controlgroup" data-type="horizontal">
+						<a class="smallButton ui-btn blue" href="#login" onclick="logout();">Log out</a>
+						<a class="smallButton ui-btn" href="#orders" data-transition="slide" data-direction="reverse">Orders</a>
+						<a class="smallButton ui-btn" href="#order_details">Order Details</a>
+						<a class="smallButton ui-btn" href="#contact" data-transition="slide">Contact</a>
+						<a class="smallButton ui-btn" href="#cart" data-transition="slide" onclick="checkCartEmpty();">Cart</a>
+					</div>
+				</h1>
+			</div>
+		</div>
+
+
+
+		<div id="items" data-role="page" data-theme="b">
+			<div class="ui-content" data-role="main">
+				<div id="itemContents" style="border-bottom: 1px solid #1d1d1d; padding-bottom: 10px;">
+				<input type="search" class="searchbox" table-link="tableItems" data-mini="true" placeholder="Search by item name" data-theme="b"/>
+					<table class="default" id="tableItems">
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+
+			<div data-role="footer" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>
+					<div class="footerNavigation" data-role="controlgroup" data-type="horizontal">
+						<a class="smallButton ui-btn blue" href="#login" onclick="logout();">Log out</a>
+						<a class="smallButton ui-btn" href="#orders" data-transition="slide" data-direction="reverse">Orders</a>
+						<a class="smallButton ui-btn" href="#contact" data-transition="slide" data-direction="reverse">Contact</a>
+						<a class="smallButton ui-btn" href="#cart" data-transition="slide" data-direction="reverse">Cart</a>
+						<a class="smallButton ui-btn" href="#items" data-transition="slide">Items</a>
+						<a class="smallButton ui-btn" href="#purchase_history" data-transition="slide">History</a>
+						<a class="smallButton ui-btn green" onclick="addItems();">Add to cart</a>
+					</div>
+				</h1>
+			</div>
+		</div>
+
+
+
+		<div id="purchase_history" data-role="page" data-theme="b">
+			<div class="ui-content" data-role="main">
+				<div id="itemContents" style="border-bottom: 1px solid #1d1d1d; padding-bottom: 10px;">
+				<input type="search" class="searchbox" table-link="tablePurchaseHistory" data-mini="true" placeholder="Search by item name" data-theme="b"/>
+					<table class="default" id="tablePurchaseHistory">
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+
+			<div data-role="footer" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>
+					<div class="footerNavigation" data-role="controlgroup" data-type="horizontal">
+						<a class="smallButton ui-btn blue" href="#login" onclick="logout();">Log out</a>
+						<a class="smallButton ui-btn" href="#orders" data-transition="slide" data-direction="reverse">Orders</a>
+						<a class="smallButton ui-btn" href="#contact" data-transition="slide" data-direction="reverse">Contact</a>
+						<a class="smallButton ui-btn" href="#cart" data-transition="slide" data-direction="reverse">Cart</a>
+						<a class="smallButton ui-btn" href="#items" data-transition="slide" data-direction="reverse">Items</a>
+						<a class="smallButton ui-btn" href="#purchase_history" data-transition="slide">History</a>
+						<a class="smallButton ui-btn green" onclick="addPHToCart();">Add to cart</a>
+					</div>
+				</h1>
+			</div>
+		</div>
+
+
+
+		<div id="cart" data-role="page" data-theme="b">
+			<div class="ui-content" data-role="main">
+				<div id="cartContents" style="border-bottom: 1px solid #1d1d1d; padding-bottom: 10px;">
+					<table class="default" id="tableCart" style="display: none;">
+						<thead style="display: none !important;"><tr></tr></thead>
+						<tbody></tbody>
+					</table>
+					<p id="cartEmpty">Your cart is empty, please add products to your cart before you create the order</p>
+				</div>
+			</div>
+
+			<a id="showCustomizeOrder" href="#customizeOrder" data-rel="popup" data-position-to="window" data-transition="slidedown"></a>
+
+			<div data-role="popup" id="customizeOrder" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="width: 300px; max-width: 300px;">
+				<a href="#" data-rel="back" class="redDelete ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+				<div data-role="header" data-theme="b">
+					<h1>Customize order</h1>
+				</div>
+				<div role="main" class="ui-content">
+					<div id="orderInfo" style="border-bottom: 1px solid #1d1d1d; padding-bottom: 10px;">
+						<div class="ui-field-contain">
+							<select class="smallButton" id="selectSupplier" style="width: 200px;"><option value="None">Select Supplier</option></select>
+
+							<div style="display:none;">
+								<input id="receiveDate" type="date" data-role="datebox" data-options='{"mode": "datebox", "calShowDays": false}' >		
+							</div>	
+						</div>
+					</div>
+
+					<div class="ui-controlgroup-vertical">
+						<a class="smallButton ui-btn blue" onclick="showDatebox();">Next</a>
+					</div>
+				</div>
+			</div>
+			
+			<a id="showScannedProduct" href="#scannedProduct" data-rel="popup" data-position-to="window" data-transition="slidedown"></a>
+
+			<div data-role="popup" id="scannedProduct" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="min-width: 270px;">
+				<a href="#" data-rel="back" class="redDelete ui-btn ui-corner-all ui-shadow ui-btn-b ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+				<div data-role="header" data-theme="b">
+					<h1 id="scannedProductHeader"><span id="scannedProductBrand" class="brand"></span><span id="scannedProductName"></span></h1>
+				</div>
+				<div role="main" class="ui-content">
+					<div class='numericInput absolute' id='scannedNumericInput' style='top: 156px !important; right: 100px !important; display: none;'><div class='niControlBox'><a class='niPlus niButton'>+</a><a class='niMinus niButton'>-</a></div><input class='niInput' id='scannedProductQuantity' type='text' value='0' data-role="none"></div>
+					<div id="scannedProductImage" style="display: none;"></div>
+					<div id="scannedProductDescription" style="border-bottom: 1px solid #1d1d1d; padding-bottom: 10px;"></div>
+					<a id="addToCart" class="smallButton ui-btn">Add product to cart</a>
+				</div>
+			</div>
+
+			<div data-role="footer" data-theme="b" data-position="fixed" data-tap-toggle="false">
+				<h1>
+					<div class="footerNavigation" data-role="controlgroup" data-type="horizontal">
+						<a class="smallButton ui-btn blue" href="#login" onclick="logout();">Log out</a>
+						<a class="smallButton ui-btn" href="#orders" data-transition="slide" data-direction="reverse">Orders</a>
+						<a class="smallButton ui-btn" href="#contact" data-transition="slide" data-direction="reverse">Contact</a>
+						<a class="smallButton ui-btn" href="#cart">Cart</a>
+						<a class="smallButton ui-btn" href="#items" data-transition="slide">Items</a>
+						<a class="smallButton ui-btn" href="#purchase_history" data-transition="slide">History</a>
+						<a class="smallButton ui-btn green" onclick="scan();">Scan</a>
+						<a class="smallButton ui-btn green" onclick="addCartToOrder();">Create order</a>
+					</div>
+				</h1>
+			</div>
+		</div>
+	</body>
+</html>
